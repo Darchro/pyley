@@ -14,8 +14,8 @@ class CayleyClient(object):
         self.delete_url = "%s/api/%s/delete" % (url, version)
 
     def Send(self, query):
-        if isinstance(query, str.encode('utf-8')):
-            r = requests.post(self.url, data=query)
+        if isinstance(query, str):
+            r = requests.post(self.url, data=query.encode('utf-8'))
             return CayleyResponse(r, r.json())
         elif isinstance(query, _GizmoQuery):
             r = requests.post(self.url, data=str(query).encode('utf-8'))
